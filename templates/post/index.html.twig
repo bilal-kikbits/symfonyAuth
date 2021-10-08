@@ -1,4 +1,5 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+{% extends 'post/layout.html.twig' %}
 
 {% block title %}All Posts!{% endblock %}
 
@@ -7,41 +8,80 @@
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
-
-<div class="example-wrapper">
-    <div class="container">
-    <h2 class="form-inline my-2 my-lg-0">All Posts </h2>
-        <a href="{{ path('post.create') }}" class="text-primary float-right !important">Add Post</a>
-
-    </div>
     {% for message in app.flashes('success') %}
         <div class="alert alert-success">
             {{ message }}
         </div>
     {% endfor %}
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Description</td>
-            <td>Action</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for post in posts %}
-        <tr>
-            <td>{{ post.id }}</td>
-            <td>{{ post.title }}</td>
-            <td>{{ post.description }}</td>
-            <td>
-                <a href="{{ path('post.show',{id:post.id}) }}" class="text-primary">Show</a>
-                <a  class="text-secondary">Edit</a>
-                <a href="{{ path('post.delete',{id:post.id}) }}" class="text-danger">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-</div>
+{#<div class="example-wrapper">#}
+{#    <h2>All Posts</h2>#}
+{#    <a href="{{ path('post.create') }}" class="text-primary float-right !important">Add Post</a>#}
+{#    <div class="table-responsive">#}
+{#        <table class="table table-striped ">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <td>Id</td>#}
+{#                <td>Title</td>#}
+{#                <td>Description</td>#}
+{#                <td>Action</td>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody>#}
+{#            {% for post in posts %}#}
+{#                <tr>#}
+{#                    <td>{{ post.id }}</td>#}
+{#                    <td>{{ post.title }}</td>#}
+{#                    <td>{{ post.description }}</td>#}
+{#                    <td>#}
+{#                        <a href="{{ path('post.show',{id:post.id}) }}" class="text-primary">Show</a>#}
+{#                        <a href="{{ path('post.edit',{id:post.id}) }}" class="text-secondary">Edit</a>#}
+{#                        <a href="{{ path('post.delete',{id:post.id}) }}" class="text-danger">Delete</a>#}
+{#                    </td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard - All Posts</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <a href="{{ path('post.create')}}" class="btn btn-sm btn-outline-primary">Add Post</a>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
+                <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Action</td>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.description| striptags()|raw }}</td>
+                        <td>
+                            <a href="{{ path('post.show',{id:post.id}) }}" class="text-primary">Show</a>
+                            <a href="{{ path('post.edit',{id:post.id}) }}" class="text-secondary">Edit</a>
+                            <a href="{{ path('post.delete',{id:post.id}) }}" class="text-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </main>
+
 {% endblock %}

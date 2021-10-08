@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -21,7 +22,7 @@ class RegisterController extends AbstractController
     public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $form=$this->createFormBuilder()
-            ->add('email')
+            ->add('email', EmailType::class)
             ->add('password', RepeatedType::class,[
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -48,6 +49,7 @@ class RegisterController extends AbstractController
             $entityManager=$this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success','Registration successful. Login now');
             return $this->redirectToRoute('app_login');
         }
         return $this->render('register/index.html.twig', [

@@ -9,7 +9,16 @@
     </style>
 
     <div class="example-wrapper">
-        <h2>Show Post</h2>
-
+        <div class="card" style="width: 18rem;">
+            <img  src="{{ '/uploads/' ~ post.image }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h1 class="card-title">{{ post.title }}</h1>
+                <p class="card-text">{{ post.description | raw }}</p>
+{#                <a href="#" class="btn btn-primary">Go somewhere</a>#}
+            </div>
+        </div>
+        <hr>
+        <a href="/post">Go Back</a>
+        <hr>
     </div>
 {% endblock %}

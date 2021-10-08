@@ -2,7 +2,42 @@
 {% extends('base.html.twig') %}
 
 {% block body %}
-    <div class="container">
-        <h1>Welcome To Kikbits</h1>
-    </div>
+
+    <main role="main">
+
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Welcome To Kikbits..!</h1>
+
+            </div>
+        </div>
+
+
+        <div class="container ">
+            <!-- Example row of columns -->
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-md-4">
+                    <img  src="{{ '/uploads/' ~ post.image }}" class="card-img-top"  style="height: 300px" alt="...">
+                    <h2 style="color: #0f74a8;"> {{ post.title}}</h2>
+                    <p style="width: 250px;
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;">
+                        {{ post.description| striptags()|raw }}</p>
+                    <p><a class="btn btn-secondary" href="{{ path('custom',{id: post.id}) }}"  role="button">View details &raquo;</a></p>
+                </div>
+                    <hr>
+                {% endfor %}
+            </div>
+
+
+            <hr>
+
+        </div> <!-- /container -->
+
+    </main>
+
+
 {% endblock %}

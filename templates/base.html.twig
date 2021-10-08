@@ -29,9 +29,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ path('post.index') }}">Posts <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('custom',{name: 'KIKBITSSSSS'}) }}">Link</a>
-                </li>
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('custom',{name: 'KIKBITSSSSS'}) }}">Link</a>#}
+{#                </li>#}
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
@@ -58,4 +58,8 @@
     </nav>
         {% block body %}{% endblock %}
     </body>
+    <footer class="container" style="text-align: center">
+        <hr>
+        <p>&copy; Kikbits@2021</p>
+    </footer>
 </html>
